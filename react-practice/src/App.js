@@ -42,9 +42,11 @@ class App extends Component {
         </ol>
         <p>Hint: Keep in mind that JavaScript strings are basically arrays!</p>
         <hr />
+        <input type="text" 
+        onChange={(event) => this.inputChangeHandler(event)} 
+        value={this.state.input}/>
         <p>This is # of Char: {this.state.input.length}</p>
         <Validation inputL={this.state.input.length} />
-        <input type="text" onChange={(event) => this.inputChangeHandler(event)} />
         {charList}
       </div>
     );
