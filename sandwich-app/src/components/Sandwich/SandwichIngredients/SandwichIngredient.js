@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './SandwichIngredient.css'
 
-const burgerIngredient = (props) => {
+const sandwichIngredient = (props) => {
 	let ingredient = null; 
 
 	switch (props.type) {
@@ -35,4 +35,4 @@ const burgerIngredient = (props) => {
 	return ingredient;
 }
 
-export default burgerIngredient;
+export default sandwichIngredient;
