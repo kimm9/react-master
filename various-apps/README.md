@@ -33,3 +33,9 @@ This is app will include various types of web applications projects to showcase 
 	- In port, shows stock data. User jquery to refresh the chart every 2 seconds. 
 2. Art Gallery / For Portfolio
 3. Portfolio
+
+
+## Developed With 
+
+React, Django, Plotly, Stock API... 
+
