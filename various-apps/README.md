@@ -3,7 +3,7 @@
 1. create layout for the dashboard 
 2. API call to retrieve data from a stock API
 3. put static plotly on the dashboard
-4. 
+4. gget the axios newsfeed 
 
 
 # Various App
