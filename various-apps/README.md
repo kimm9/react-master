@@ -1,3 +1,11 @@
+## TODOS
+
+1. create layout for the dashboard 
+2. API call to retrieve data from a stock API
+3. put static plotly on the dashboard
+4. 
+
+
 # Various App
 
 This is app will include various types of web applications projects to showcase react skills. 
@@ -38,4 +46,6 @@ This is app will include various types of web applications projects to showcase 
 ## Developed With 
 
 React, Django, Plotly, Stock API... 
+
+
 
