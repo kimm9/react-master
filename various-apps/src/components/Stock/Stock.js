@@ -5,16 +5,18 @@ import StockDashboard from './StockDashboard/StockDashboard'
 const stock = ( props ) => {
 	const dataObj = props.stockData
 	
+	//made object list to array THIS IS AN ARRAY
 	const transformedStockData = Object.values(props.stockData).map((value) => { 
-			console.log(value)
-			return <div>{value}</div>
-
+			return value
 	})
+
+
+	
 	
 
 	return(
 		<div>
-			<StockDashboard transformedStockData={transformedStockData}/>
+			<StockDashboard valueArr={transformedStockData}/>
 			<hr />
 			{transformedStockData}
 		</div>

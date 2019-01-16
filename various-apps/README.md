@@ -3,7 +3,7 @@
 1. create layout for the dashboard 
 2. API call to retrieve data from a stock API
 3. put static plotly on the dashboard
-4. gget the axios newsfeed 
+4. get the axios newsfeed 
 
 
 # Various App
@@ -45,7 +45,7 @@ This is app will include various types of web applications projects to showcase 
 
 ## Developed With 
 
-React, Django, Plotly, Stock API... 
+React, Django, Plotly, IEX Group API (stock data)
 
 
 
