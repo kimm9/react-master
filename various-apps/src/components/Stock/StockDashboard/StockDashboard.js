@@ -5,11 +5,9 @@ import Plot from 'react-plotly.js';
 
 const StockDashboard = (props) => {
 	const articleData = Object.values(props.articles).map(value => {
-		return <div>value.author</div>
+		return <div>{value.author}</div>
 	})
-	console.log(Object.values(props.articles).map(value => {
-		return value.author
-	}))
+	console.log(articleData)
 	//next thing to do here is to find a way to make it return it as a <div> since it returns as 'value.author'
 
 	return(
