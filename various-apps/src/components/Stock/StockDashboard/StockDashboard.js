@@ -5,10 +5,25 @@ import Plot from 'react-plotly.js';
 
 const StockDashboard = (props) => {
 	const articleData = Object.values(props.articles).map(value => {
-		return <div>{value.author}</div>
+		return  <div>
+					<div className="card mb-2">
+					  <picture>
+					  <img src={value.urlToImage} className="card-img-top img-thumbnail" alt="Responsive image" />
+					  </picture>
+					  <div className="card-body">
+					    <h4 className="card-title">{value.title} </h4>
+					    <h6><small>by {value.author}</small></h6>
+					    <p className="card-text">{value.description}</p>
+					    <a href={value.url} class="btn btn-primary">Read Full Article</a>
+					  </div>
+					  <div class="card-footer text-muted">
+						    Published at {value.publishedAt.substring(0,10)}
+					  </div>
+					</div>
+					<br></br>
+				</div>
 	})
-	console.log(articleData)
-	//next thing to do here is to find a way to make it return it as a <div> since it returns as 'value.author'
+	console.log(props.articles)
 
 	return(
 		<div>

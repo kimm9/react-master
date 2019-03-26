@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Aux from '../../hoc/Aux'
 import axios from 'axios'
+import Input from '../../components/Input/Input'
 import Stock from '../../components/Stock/Stock'
 
 class StockFinder extends Component {
@@ -25,7 +26,8 @@ class StockFinder extends Component {
 		},
 		data: '',
 		layout: '',
-		articles: ''
+		articles: '',
+
 
 
 	}
@@ -34,7 +36,7 @@ class StockFinder extends Component {
 		axios.all([
 			axios.get('https://newsapi.org/v2/everything?' +
 	          'q=Apple&' +
-	          'from=2019-01-19&' +
+	          'from=2019-03-19&' +
 	          'sortBy=popularity&' +
 	          'apiKey=f028c8dd8e3047f6922cb14e33f32efa'),
 			axios.get('https://api.iextrading.com/1.0/stock/aapl/batch?types=quote,news,chart&range=1m&last=1')
@@ -137,6 +139,10 @@ class StockFinder extends Component {
 
 	} //end of componentdidmount
 
+	//input changed handler for stock suggestion, able to differentiate stock and ticker
+
+	
+
 	componentDidUpdate() {
 
 	}
@@ -145,8 +151,15 @@ class StockFinder extends Component {
 	render() {
 		return (
 			<Aux>
+				<div className="container">
+				<div className="input-group input-group-lg">
+				  <div className="input-group-prepend">
+				    <span className="input-group-text" id="inputGroup-sizing-lg">Search</span>
+				  </div>
+				  <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" />
+				</div>
 				<Stock stockData={this.state.stockData} data={this.state.data} layout={this.state.layout} articles={this.state.articles}/>
-				<div>Searchbox, and maybe filters</div>
+				</div>
 			</Aux>
 		)
 	}
