@@ -10,7 +10,7 @@ const stock = ( props ) => {
 	const transformedStockData = Object.values(props.stockData).map((value) => { 
 			return value
 	})
-	console.log(dataObj)
+	//console.log(dataObj)
 
 	// const transformedChartData = Object.values(props.chartData).map((value) => {
 	// 	return value

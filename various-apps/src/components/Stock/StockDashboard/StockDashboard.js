@@ -23,7 +23,7 @@ const StockDashboard = (props) => {
 					<br></br>
 				</div>
 	})
-	console.log(props.articles)
+	//console.log(props.articles)
 
 	return(
 		<div>

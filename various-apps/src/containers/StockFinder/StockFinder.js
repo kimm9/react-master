@@ -8,6 +8,7 @@ class StockFinder extends Component {
 
 	state = {
 		allstockdata: '',
+		search: '',
 		stockData: {
 			name: '',
 			ticker: '',
@@ -27,20 +28,30 @@ class StockFinder extends Component {
 		data: '',
 		layout: '',
 		articles: '',
+		symbolName: [],
+		searchForm: {
+
+		}
 
 
 
 	}
 
 	componentDidMount() {
+		// axios.get('https://newsapi.org/v2/everything?' +
+	  //         'q=Apple&' +
+	  //         'from=2019-03-19&' +
+	  //         'sortBy=popularity&' +
+	  //         'apiKey=f028c8dd8e3047f6922cb14e33f32efa')
 		axios.all([
 			axios.get('https://newsapi.org/v2/everything?' +
 	          'q=Apple&' +
 	          'from=2019-03-19&' +
 	          'sortBy=popularity&' +
 	          'apiKey=f028c8dd8e3047f6922cb14e33f32efa'),
-			axios.get('https://api.iextrading.com/1.0/stock/aapl/batch?types=quote,news,chart&range=1m&last=1')
-			]).then(axios.spread((articles, stockdata) => {
+			axios.get('https://api.iextrading.com/1.0/stock/aapl/batch?types=quote,news,chart&range=1m&last=1'),
+			axios.get('https://api.iextrading.com/1.0/ref-data/symbols')
+			]).then(axios.spread((articles, stockdata, symbols) => {
 				const addfive = (x1) => {
 				return x1 + 5
 				}
@@ -48,7 +59,10 @@ class StockFinder extends Component {
 					return x1 - 5
 				}
 				//set state for stock data
-				console.log(articles.data.articles)
+				//console.log(symbols.data)
+				// console.log(symbols.data.map(value => {
+				// 	return value.name + " (" + value.symbol + ")"
+				// }))
 				const trace1 = {
 					type: "scatter",
 			  		mode: "lines",
@@ -73,7 +87,18 @@ class StockFinder extends Component {
 						}),
 					  line: {color: 'red'}
 				}
-				console.log(stockdata.data, articles.data)
+				//console.log(stockdata.data, articles.data)
+				const stockNameArr=[];
+				console.log(symbols.data)
+
+				symbols.data.map(stock => {
+					stockNameArr.push({
+						stockName: stock.name,
+						stockSymbol: stock.symbol
+					})
+				})
+				console.log(stockNameArr)
+				// move all the 
 				this.setState({
 					articles: articles.data.articles,
 					stockData: {
@@ -132,7 +157,8 @@ class StockFinder extends Component {
 						    range: [subfive(trace2.y[0]), addfive(trace1.x[trace1.x.length-1])],
 						    type: 'linear'
 						  }
-					}
+					},
+				symbolName: stockNameArr
 				},
 				)
 			}))
@@ -140,11 +166,17 @@ class StockFinder extends Component {
 	} //end of componentdidmount
 
 	//input changed handler for stock suggestion, able to differentiate stock and ticker
-
-	
+  handleInputChange = event => {
+    this.setState({ search: event.target.value });
+    console.log(this.state.search)
+  };
+	handleStockSubmit = event => {
+		event.preventDefault();
+		
+	}
 
 	componentDidUpdate() {
-
+		console.log(this.state.symbolName)
 	}
 
 	
@@ -152,12 +184,18 @@ class StockFinder extends Component {
 		return (
 			<Aux>
 				<div className="container">
+				<form>
 				<div className="input-group input-group-lg">
 				  <div className="input-group-prepend">
 				    <span className="input-group-text" id="inputGroup-sizing-lg">Search</span>
 				  </div>
-				  <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" />
+					<input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" onChange={this.handleInputChange}
+					list="stocks" />
+					<datalist id="stocks">
+						{this.state.symbolName.map(stock=> <option value={stock.stockName + " (" + stock.stockSymbol + ")"} key={stock} />)}
+					</datalist>
 				</div>
+				</form>
 				<Stock stockData={this.state.stockData} data={this.state.data} layout={this.state.layout} articles={this.state.articles}/>
 				</div>
 			</Aux>
