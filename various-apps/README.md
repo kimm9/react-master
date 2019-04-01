@@ -2,8 +2,7 @@
 
 1. create layout for the dashboard 
 2. create a search bar, dropdown
-3. use user input to update the data dynamically. 
-4. in stockFinder.js deal with the object key error. After that do creat handleStocksubmit 
+3. QA this whole app, know what needs to be updated and fixed, what else can I do to make this user friendly...SCRUTINIZE
 
 # Various App
 
