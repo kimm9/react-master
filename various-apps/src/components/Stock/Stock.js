@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './Stock.css'
 import StockDashboard from './StockDashboard/StockDashboard'
+import SearchResult from './SearchResult/SearchResult'
 
 const stock = ( props ) => {
 	const dataObj = props.stockData
@@ -48,9 +49,14 @@ const stock = ( props ) => {
 
 	return(
 		<div>
+			<div className="row">
+			
+			</div>
 			<StockDashboard valueArr={transformedStockData}
 			data={props.data} layout={props.layout} articles={props.articles}
 			/>
+			<SearchResult valueArr={transformedStockData}
+			data={props.data} layout={props.layout} articles={props.articles}/>
 			<hr />
 			{transformedStockData}
 		</div>
