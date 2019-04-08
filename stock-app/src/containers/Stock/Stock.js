@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import Aux from '../../hoc/Aux'
 import axios from 'axios'
-import Stock from '../../components/Stock/Stock'
+import Dashboard from '../../components/Dashboard/Dashboard';
 
-
-class StockFinder extends Component {
+class Stock extends Component {
 
 	state = {
 		date:'',
@@ -189,9 +187,12 @@ class StockFinder extends Component {
 	
 	render() {
 		return (
-			<Aux>
+            <div>
 				<div className="container">
-				<Stock 
+                <h1>hello</h1>
+                <Dashboard 
+                marketData={this.state.brief}/>
+				{/* <Stock 
 					stockData={this.state.stockData} 
 					data={this.state.data} 
 					layout={this.state.layout} 
@@ -199,11 +200,11 @@ class StockFinder extends Component {
 					marketData={this.state.brief} 
 					stockSubmit={this.handleStockSubmit} 
 					inputChange={this.handleInputChange}
-					symbols={this.state.symName}/>
+					symbols={this.state.symName}/> */}
 				</div>
-			</Aux>
+            </div>
 		)
 	}
 }
 
-export default StockFinder;
+export default Stock;

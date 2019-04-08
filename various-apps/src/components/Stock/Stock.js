@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './Stock.css'
 import StockDashboard from './StockDashboard/StockDashboard'
 import SearchResult from './SearchResult/SearchResult'
+import SearchForm from './SearchForm/SearchForm'; 
 
 const stock = ( props ) => {
 	const dataObj = props.stockData
@@ -52,8 +53,12 @@ const stock = ( props ) => {
 			<div className="row">
 			
 			</div>
-			<StockDashboard valueArr={transformedStockData}
-			data={props.data} layout={props.layout} articles={props.articles}
+			<StockDashboard marketData={props.marketData}
+			/>
+			<SearchForm 
+			submit={props.stockSubmit}
+			inputchange={props.inputChange}
+			allSymbol={props.symbols}
 			/>
 			<SearchResult valueArr={transformedStockData}
 			data={props.data} layout={props.layout} articles={props.articles}/>

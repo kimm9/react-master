@@ -1,8 +1,12 @@
 import React from 'react';
-import Aux from '../../hoc/Aux'
-import classes from './Layout.css'
+import { Route } from 'react-router-dom'
+import Aux from '../../hoc/Aux';
+import classes from './Layout.css';
+import SearchForm from '../Stock/SearchForm/SearchForm'
+
 
 const layout = ( props ) => (
+
 	<Aux> 
 		<nav className="navbar navbar-expand-lg navbar-light bg-light">
 		  <a className="navbar-brand" href="/">Stock Finder</a>
@@ -15,19 +19,20 @@ const layout = ( props ) => (
 		        <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
 		      </li>
 		      <li className="nav-item active">
-		        <a className="nav-link" href="/">Search<span className="sr-only">(current)</span></a>
+		        <a className="nav-link" href="/search">Search<span className="sr-only">(current)</span></a>
 		      </li>
 					<li className="nav-item active">
-		        <a className="nav-link" href="/">Dashboard<span className="sr-only">(current)</span></a>
+		        <a className="nav-link" href="/dashboard">Dashboard<span className="sr-only">(current)</span></a>
 		      </li>
 		    </ul>
 		  </div>
 		</nav>
+		<Route path="/search" exact component={SearchForm} />
 		<main className={classes.Content}>
 			{props.children}
 		</main>
-
 	</Aux>
+
 )
 
 export default layout;
