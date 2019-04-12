@@ -23,6 +23,9 @@ const SearchResult = (props) => {
 					<br></br>
 				</div>
 	})
+
+	
+
     
     return(
         <div>
