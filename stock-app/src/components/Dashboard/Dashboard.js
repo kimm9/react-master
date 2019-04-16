@@ -11,19 +11,19 @@ class Dashboard extends Component {
         brief: '',
         briefCards: '',
         sectorPerformance: '',
-        ipo: {},
+        ipo: '',
         gainers: '',
         losers: '',
         news: ''
     }
 
     componentDidMount() {
-		const allSector=[];
+        const allSector=[];
+        const allUpIpos=[];
 		axios.all([
             axios.get('https://api.iextrading.com/1.0/stock/market/batch?symbols=aapl,fb,wmt,bac,baba,f,googl,vz&types=quote,news,chart&range=1m&last=5'),
             axios.get('https://api.iextrading.com/1.0/stock/market/sector-performance'),
             axios.get('https://api.iextrading.com/1.0/stock/market/upcoming-ipos'),
-            axios.get('https://api.iextrading.com/1.0/stock/market/today-ipos'),
             axios.get('https://api.iextrading.com/1.0/stock/market/today-ipos'),
             axios.get('https://api.iextrading.com/1.0/stock/market/list/gainers'),
             axios.get('https://api.iextrading.com/1.0/stock/market/list/losers'),
@@ -37,13 +37,27 @@ class Dashboard extends Component {
                     sectDate: sect.lastUpdated
                 })
             })//end of data map
+            console.log(upIpo.data["rawData"])
+            upIpo.data["viewData"].map((ipo, index) => {
+                allUpIpos.push({
+                    key: index,
+                    company: ipo.Company,
+                    market: ipo.Market,
+                    symbol: ipo.Symbol,
+                    price: ipo.Price,
+                    shares: ipo.Shares,
+                    amount: ipo.Amount,
+                    floatPercent: ipo.Percent,
+                    expected: ipo.Expected,
+                    float: ipo.Float,
+                })
+            })
+            console.log(allUpIpos)
 				this.setState({
                     brief: comps.data,
                     sectorPerformance: allSector,
-                    ipo: {
-                        upcoming: upIpo.data,
-                        today: todayIpo.data
-                    },
+                    ipo: allUpIpos,
+                    today: todayIpo.data,
                     gainers: gainer.data,
                     losers: loser.data,
                     news: news.data
@@ -52,7 +66,6 @@ class Dashboard extends Component {
     }
 
     componentDidUpdate() {
-        console.log(this.state.sectorPerformance)
 
     }
 
@@ -62,11 +75,10 @@ class Dashboard extends Component {
         return (
             <div>
                 <div className="container">
-                        <h4>Today's Market Dashboard</h4>
                             <DashboardResult 
                             marketBrief={this.state.brief}
                             sector={this.state.sectorPerformance}
-                            ipos={this.state.ipo}
+                            upcomingIpo={this.state.ipo}
                             gainer={this.state.gainers}
                             loser={this.state.losers}
                             news={this.state.news}

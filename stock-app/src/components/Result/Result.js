@@ -18,7 +18,7 @@ const Result = (props) => {
     const articleData = Object.values(props.articles).map(value => {
 		return  <div>
                     <div className="media">
-                        <img src={value.urlToImage} className="d-flex align-self-center mr-3" alt="..." width="70" height="80" />
+                        <img src={value.urlToImage} className="d-flex align-self-center mr-3" alt="..." width="70" height="60" />
                         <div className="media-body">
                             <h5 className="mt-0">{value.title} <small>by {value.author}</small> </h5>
                             <p>{value.description}</p>
