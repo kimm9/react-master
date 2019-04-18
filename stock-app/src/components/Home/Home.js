@@ -9,45 +9,31 @@ const Home = (props) => {
     return (
         <div>
             {/* jumbotron */}
-            <div className="jumbotron jumbotron-fluid">
+            <div className="jumbotron jumbotron-fluid contentJ0">
                 <div className="container">
                 <h1 className="display-4">Stock App</h1>
                 <p className="lead">This is an app that provides real time stock data</p>
                 <hr className="my-4" />
-                <p>It user IEX trading API</p>
-                <a className="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                <p>It uses IEX trading API and News API</p>
                 </div>
             </div>
             {/* Bunch of cards */}
             <div className="container">
                 <div className="row">
-                    <div className="col">
-                        <div class="jumbotron">
-                            <h1 class="display-4">Hello, world!</h1>
-                            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                            <hr class="my-4"/>
-                            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-                            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-                        </div>
-                    </div>
-                </div>
-                <div className="row">
                     <div className="col-sm">
-                        <div class="jumbotron">
-                            <h1 class="display-4">Hello, world!</h1>
-                            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                        <div class="jumbotron contentJ2">
+                            <h5 class="display-4">Real Time Market News</h5>
+                            <h2 class="display-4">Market Dasboard</h2>
                             <hr class="my-4"/>
-                            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-                            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                            <a class="btn btn-primary btn-lg" href="/dashboard" role="button">Dashboard</a>
                         </div>
                     </div>
                     <div className="col-sm">
-                        <div class="jumbotron">
-                            <h1 class="display-4">Hello, world!</h1>
-                            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                    <div class="jumbotron contentJ2">
+                            <h5 class="display-4">Find Real Time Stock Data</h5>
+                            <h1 class="display-4">Search Here</h1>
                             <hr class="my-4"/>
-                            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-                            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                            <a class="btn btn-primary btn-lg" href="/search" role="button">Dashboard</a>
                         </div>
                     </div>
                 </div>

@@ -4,12 +4,16 @@ import PropTypes from 'prop-types';
 import classes from './Search.css';
 import Plot from 'react-plotly.js';
 import Result from '../Result/Result'
+import Autosuggest from 'react-autosuggest';
+
 
 
 
 class Search extends Component {
 
     state = {
+    value: '',
+    suggestions: [],
 		isData: false,
     date:'',
 		allstockdata: '',
@@ -43,6 +47,8 @@ class Search extends Component {
 		const yyyy = today.getFullYear()
 		const fulldate = yyyy + '-' + mm + '-' + dd;
 		const stockNameArr=[];
+		
+
 		axios.all([
 			axios.get('https://api.iextrading.com/1.0/ref-data/symbols')
 		]).then(axios.spread((symbols) => {
@@ -61,20 +67,30 @@ class Search extends Component {
 		this.setState({
 			date: fulldate
 		})
-    }
+		}
 
-    handleInputChange = event => {
+
+
+
+
+    handleInputChange = (event) => {
+		
 		this.state.symName.map(sym => {
-			if(event.target.value === sym.nameSymbol || event.target.value.toUpperCase() === sym.stockName.toUpperCase() || event.target.value.toUpperCase() === sym.stockSymbol.toUpperCase() ) {
+			if(sym.nameSymbol.toUpperCase().includes(event.target.value.toUpperCase()) || sym.stockName.toUpperCase().includes(event.target.value.toUpperCase()) || sym.stockSymbol.toUpperCase().includes(event.target.value.toUpperCase()) ) {
 				this.setState({
 					search: sym
 				})
 			}
 		})
-    };
+
+		};
+		
+		
+
+
 
     handleStockSubmit = event => {
-
+			event.preventDefault();
 		axios.all([
 			axios.get('https://newsapi.org/v2/everything?q=' + this.state.search.stockName + '&from=' + this.state.date + '&sortBy=popularity&apiKey=f028c8dd8e3047f6922cb14e33f32efa'),
 		axios.get('https://api.iextrading.com/1.0/stock/' + this.state.search.stockSymbol + '/batch?types=quote,news,chart,company&range=1m&last=1')
@@ -118,6 +134,7 @@ class Search extends Component {
 				// move all the 
 				this.setState({
 					isData: !doesShow,
+
 					articles: articles.data.articles,
 					stockData: {
 					name: stockdata.data.quote.companyName,
@@ -150,7 +167,9 @@ class Search extends Component {
 				layout:  {
 					title: 'Stock Time Series Chart',
 					xaxis: {
-						    autorange: true,
+								autorange: true,
+								width: 800,
+								height: 800,
 						    range: [trace1.x[0], trace1.x[trace1.x.length - 1]],
 						    rangeselector: {buttons: [
 						        {
@@ -180,16 +199,22 @@ class Search extends Component {
 				},
 				)
 		})) // end of axios all
-		
-		event.preventDefault();
 	}
 
     render() {
         return (
             <div>
+							<div className="jumbotron" id="searchJ">
+								<h1 className="display-4">Find your stock here!</h1>
+								<p className="lead">Enter company's name or a symbol to find it's real time data!</p>
+								<p>Search result includes Company Profile, Market Data, Price Chart, Top News</p>
+								<hr className="my-4"/>
                 <form onSubmit={this.handleStockSubmit}>
-                <div className="input-group input-group-lg">
-                    <input 
+                <div className="input-group input-group-md col-6">
+										<datalist className="datalist" id="stocks">
+                        {this.state.symName.map(symbol=> <option value={symbol.nameSymbol} key={symbol.key} />)}
+                    </datalist>
+										<input 
                         type="text" 
                         className="form-control" 
                         aria-label="Sizing example input" 
@@ -197,9 +222,7 @@ class Search extends Component {
                         onChange={this.handleInputChange}
                         list="stocks"
                         id="stock" />
-                    <datalist id="stocks">
-                        {this.state.symName.map(symbol=> <option value={symbol.nameSymbol} key={symbol.key} />)}
-                    </datalist>
+
                     <button
                         type="submit"
                         className="btn btn-success"
@@ -208,6 +231,7 @@ class Search extends Component {
                     </button>
                 </div>
                 </form>
+								</div>
                 <Result  
 								stockData={this.state.stockData}
 								allstockdata={this.state.allstockdata} 
